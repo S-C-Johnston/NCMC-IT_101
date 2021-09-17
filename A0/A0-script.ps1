@@ -36,7 +36,7 @@ function find-text_in_test_dir($target_string){
 };
 
 function remove-test_subdirs(){
-    get-childitem -recurse ./test/* -directory | remove-item -whatif -recurse -ea 0;
+    get-childitem -recurse ./test/* -directory | remove-item -recurse -ea 0;
 };
 
 
@@ -74,6 +74,7 @@ function main(){
 
     find-text_in_test_dir -target_string "folder";
 
+    remove-test_subdirs;
 };
 
 main $MAGENTA_DIR $CYAN_DIR;
