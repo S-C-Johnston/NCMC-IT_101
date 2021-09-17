@@ -18,6 +18,8 @@ function new-color-batch($target_file){
     for %%I in ("%~dp0.") do for %%J in ("%%~dpI.") do set ParentFolderName=%%~nxJ
     echo This file is in folder: %ParentFolderName%'
     | out-file -encoding ascii -filepath "$target_file" -ea 0
+
+    #main function text from https://stackoverflow.com/a/60046276
 }
 
 new-color-batch("$magenta_dir/$color_filename")
