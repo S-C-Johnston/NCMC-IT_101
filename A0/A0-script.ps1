@@ -7,6 +7,7 @@ $MAGENTA_DIR = "./test/red/magenta"
 $CYAN_DIR = "./test/blue/cyan"
 $COLOR_FILENAME = "COLOR.bat"
 
+$SCRIPT_ROOT = $(Get-Location)
 
 mkdir $MAGENTA_DIR -ea 0
 mkdir $CYAN_DIR -ea 0
@@ -30,8 +31,9 @@ icacls.exe "$MAGENTA_DIR/$COLOR_FILENAME" /grant everyone:f
 icacls.exe "$CYAN_DIR/$COLOR_FILENAME" /grant everyone:f
 
 function update-color-batch($target_file){
-    write-output '@echo on
-    dir /s /b *.bat >> "%~0\..\..\..\scripts"'
+    $scripts_file = "$SCRIPT_ROOT\test\scripts"
+    write-output "@echo on
+    dir /s /b *.bat >> ""${scripts_file}"""
     | out-file -Append -Encoding ascii -FilePath "$target_file" -ea 0
 }
 
