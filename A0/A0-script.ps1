@@ -9,7 +9,7 @@ $CYAN_DIR = "./test/blue/cyan"
 $SCRIPT_ROOT = $(Get-Location)
 
 function new-color-batch($target_file){
-    echo "Debug new-color-batch, target_file is: $target_file"
+    Write-Output "Debug new-color-batch, target_file is: $target_file"
     write-output '@echo off
     for %%I in ("%~dp0.") do for %%J in ("%%~dpI.") do set ParentFolderName=%%~nxJ
     echo This file is in folder: %ParentFolderName%'
@@ -19,7 +19,7 @@ function new-color-batch($target_file){
 }
 
 function update-color-batch($target_file){
-    echo "Debug update-color-batch, target_file is: $target_file"
+    Write-Output "Debug update-color-batch, target_file is: $target_file"
     $scripts_file = "$SCRIPT_ROOT\test\scripts"
     write-output "@echo on
     dir /s /b *.bat >> ""${scripts_file}"""
