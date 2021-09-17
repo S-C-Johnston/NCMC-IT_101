@@ -1,4 +1,4 @@
 
-A0/test/blue/cyan/COLOR.bat
-A0/test/red/magenta/COLOR.bat
-A0/test/scripts
+A0/test/*
+A0/Out-File
+
