@@ -35,6 +35,11 @@ function find-text_in_test_dir($target_string){
     | select-string -allmatches "$target_string" > ./test/foundText.txt
 }
 
+function remove-test_subdirs(){
+    get-childitem -recurse ./test/* -directory | remove-item -whatif -recurse -ea 0
+}
+
+
 function main() {
 
     foreach ($directory in $args)
@@ -68,7 +73,8 @@ function main() {
 
     write-lister_script;
 
-    find-text_in_test_dir;
+    find-text_in_test_dir -target_string "folder";
+
 }
 
 main $MAGENTA_DIR $CYAN_DIR;
