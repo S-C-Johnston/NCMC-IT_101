@@ -25,6 +25,11 @@ function update-color_bat_file($target_file){
     dir /s /b *.bat >> ""${scripts_file}"""
     | out-file -Append -Encoding ascii -FilePath "$target_file" -ea 0
 }
+
+function write-lister_script(){
+    write-output "Get-ChildItem ./test -Recurse > ./test/contents" > list-recursive.ps1 -ea 0
+}
+
 function main() {
 
     foreach ($directory in $args)
@@ -55,6 +60,8 @@ function main() {
         Write-Output $colornext_file
         Copy-Item "$($directory.parent)/*.bat" "$colornext_file"
     }
+
+    write-lister_script;
 }
 
 main $MAGENTA_DIR $CYAN_DIR;
