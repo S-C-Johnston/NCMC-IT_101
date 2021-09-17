@@ -40,3 +40,10 @@ function update-color-batch($target_file){
 update-color-batch("$MAGENTA_DIR/$COLOR_FILENAME")
 update-color-batch("$CYAN_DIR/$COLOR_FILENAME")
 
+foreach ($directory in $(Get-ChildItem -directory -recurse)){
+    if ($directory.name -eq 'test'){
+        continue
+    }
+
+    mkdir $directory/next
+}
