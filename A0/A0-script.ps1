@@ -10,6 +10,7 @@ $COLOR_FILENAME = "COLOR.bat"
 $SCRIPT_ROOT = $(Get-Location)
 
 function new-color-batch($target_file){
+    echo "Debug new-color-batch, target_file is: $target_file"
     write-output '@echo off
     for %%I in ("%~dp0.") do for %%J in ("%%~dpI.") do set ParentFolderName=%%~nxJ
     echo This file is in folder: %ParentFolderName%'
@@ -19,6 +20,7 @@ function new-color-batch($target_file){
 }
 
 function update-color-batch($target_file){
+    echo "Debug update-color-batch, target_file is: $target_file"
     $scripts_file = "$SCRIPT_ROOT\test\scripts"
     write-output "@echo on
     dir /s /b *.bat >> ""${scripts_file}"""
@@ -26,22 +28,14 @@ function update-color-batch($target_file){
 }
 function main() {
 
-    mkdir $MAGENTA_DIR -ea 0
-    mkdir $CYAN_DIR -ea 0
-
-    new-item -ItemType File $MAGENTA_DIR/$COLOR_FILENAME -ea 0
-    new-item -ItemType File $CYAN_DIR/$COLOR_FILENAME -ea 0
-
-
-    new-color-batch("$MAGENTA_DIR/$COLOR_FILENAME")
-    new-color-batch("$CYAN_DIR/$COLOR_FILENAME")
-
-    icacls.exe "$MAGENTA_DIR/$COLOR_FILENAME" /grant everyone:f
-    icacls.exe "$CYAN_DIR/$COLOR_FILENAME" /grant everyone:f
-
-
-    update-color-batch("$MAGENTA_DIR/$COLOR_FILENAME")
-    update-color-batch("$CYAN_DIR/$COLOR_FILENAME")
+    foreach ($directory in $args){
+    echo "Debug main, directory is: $directory"
+    mkdir $directory -ea 0
+    new-item -ItemType File $directory/$COLOR_FILENAME -ea 0
+    new-color-batch "$directory/$COLOR_FILENAME"
+    icacls.exe "$directory/$COLOR_FILENAME" /grant everyone:f
+    update-color-batch "$directory/$COLOR_FILENAME"
+    }
 
     foreach ($directory in $(Get-ChildItem -directory -recurse)) {
         if ($directory.name -eq 'test') {
@@ -52,4 +46,4 @@ function main() {
     }
 }
 
-main;
+main $MAGENTA_DIR $CYAN_DIR;
