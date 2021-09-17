@@ -8,8 +8,8 @@ $CYAN_DIR = "./test/blue/cyan"
 
 $SCRIPT_ROOT = $(Get-Location)
 
-function new-color-batch($target_file){
-    Write-Output "Debug new-color-batch, target_file is: $target_file"
+function new-color_bat_file($target_file){
+    Write-Output "Debug new-color_bat_file, target_file is: $target_file"
     write-output '@echo off
     for %%I in ("%~dp0.") do for %%J in ("%%~dpI.") do set ParentFolderName=%%~nxJ
     echo This file is in folder: %ParentFolderName%'
@@ -18,8 +18,8 @@ function new-color-batch($target_file){
     #main function text from https://stackoverflow.com/a/60046276
 }
 
-function update-color-batch($target_file){
-    Write-Output "Debug update-color-batch, target_file is: $target_file"
+function update-color_bat_file($target_file){
+    Write-Output "Debug update-color_bat_file, target_file is: $target_file"
     $scripts_file = "$SCRIPT_ROOT\test\scripts"
     write-output "@echo on
     dir /s /b *.bat >> ""${scripts_file}"""
@@ -40,9 +40,9 @@ function main() {
 
         $color_filename = $directory.name + ".bat"
         new-item -ItemType File $directory/$color_filename -ea 0
-        new-color-batch "$directory/$color_filename"
+        new-color_bat_file "$directory/$color_filename"
         icacls.exe "$directory/$color_filename" /grant everyone:f
-        update-color-batch "$directory/$color_filename"
+        update-color_bat_file "$directory/$color_filename"
         mkdir $directory/next -ErrorAction 0
     }
 
