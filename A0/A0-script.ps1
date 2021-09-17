@@ -5,7 +5,6 @@
 
 $MAGENTA_DIR = "./test/red/magenta"
 $CYAN_DIR = "./test/blue/cyan"
-$COLOR_FILENAME = "COLOR.bat"
 
 $SCRIPT_ROOT = $(Get-Location)
 
@@ -28,13 +27,10 @@ function update-color-batch($target_file){
 }
 function main() {
 
-    foreach ($directory in $args){
-    echo "Debug main, directory is: $directory"
-    mkdir $directory -ea 0
-    new-item -ItemType File $directory/$COLOR_FILENAME -ea 0
-    new-color-batch "$directory/$COLOR_FILENAME"
-    icacls.exe "$directory/$COLOR_FILENAME" /grant everyone:f
-    update-color-batch "$directory/$COLOR_FILENAME"
+    foreach ($directory in $args)
+    {
+        Write-Output "Debug main, directory is: $directory"
+        mkdir $directory -ea 0
     }
 
     foreach ($directory in $(Get-ChildItem -directory -recurse)) {
@@ -42,7 +38,22 @@ function main() {
             continue
         }
 
+        $color_filename = $directory.name + ".bat"
+        new-item -ItemType File $directory/$color_filename -ea 0
+        new-color-batch "$directory/$color_filename"
+        icacls.exe "$directory/$color_filename" /grant everyone:f
+        update-color-batch "$directory/$color_filename"
         mkdir $directory/next -ErrorAction 0
+    }
+
+    foreach ($directory in $(Get-ChildItem -Directory -Recurse)){
+        if ($directory.Name -ne 'next'){
+            continue
+        }
+
+        $colornext_file = "$($directory)/$($directory.parent.name)next.bat"
+        Write-Output $colornext_file
+        Copy-Item "$($directory.parent)/*.bat" "$colornext_file"
     }
 }
 
