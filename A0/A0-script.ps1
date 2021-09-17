@@ -3,15 +3,16 @@
 ##Stewart Johnston (johnstons1@student.ncmich.edu)
 ##For the purpose of demonstrating basic CLI knowledge
 
-$magenta_dir = "./test/red/magenta"
-$cyan_dir = "./test/blue/cyan"
-$color_filename = "COLOR.bat"
+$MAGENTA_DIR = "./test/red/magenta"
+$CYAN_DIR = "./test/blue/cyan"
+$COLOR_FILENAME = "COLOR.bat"
 
-mkdir $magenta_dir -ea 0
-mkdir $cyan_dir -ea 0
 
-new-item -ItemType File $magenta_dir/$color_filename -ea 0
-new-item -ItemType File $cyan_dir/$color_filename -ea 0
+mkdir $MAGENTA_DIR -ea 0
+mkdir $CYAN_DIR -ea 0
+
+new-item -ItemType File $MAGENTA_DIR/$COLOR_FILENAME -ea 0
+new-item -ItemType File $CYAN_DIR/$COLOR_FILENAME -ea 0
 
 function new-color-batch($target_file){
     write-output '@echo off
@@ -22,11 +23,11 @@ function new-color-batch($target_file){
     #main function text from https://stackoverflow.com/a/60046276
 }
 
-new-color-batch("$magenta_dir/$color_filename")
-new-color-batch("$cyan_dir/$color_filename")
+new-color-batch("$MAGENTA_DIR/$COLOR_FILENAME")
+new-color-batch("$CYAN_DIR/$COLOR_FILENAME")
 
-icacls.exe "$magenta_dir/$color_filename" /grant everyone:f
-icacls.exe "$cyan_dir/$color_filename" /grant everyone:f
+icacls.exe "$MAGENTA_DIR/$COLOR_FILENAME" /grant everyone:f
+icacls.exe "$CYAN_DIR/$COLOR_FILENAME" /grant everyone:f
 
 function update-color-batch($target_file){
     write-output '@echo on
@@ -34,5 +35,6 @@ function update-color-batch($target_file){
     | out-file -Append -Encoding ascii -FilePath "$target_file" -ea 0
 }
 
-update-color-batch("$magenta_dir/$color_filename")
-update-color-batch("$cyan_dir/$color_filename")
+update-color-batch("$MAGENTA_DIR/$COLOR_FILENAME")
+update-color-batch("$CYAN_DIR/$COLOR_FILENAME")
+
