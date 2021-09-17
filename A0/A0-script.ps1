@@ -30,6 +30,11 @@ function write-lister_script(){
     write-output "Get-ChildItem ./test -Recurse > ./test/contents" > list-recursive.ps1 -ea 0
 }
 
+function find-text_in_test_dir($target_string){
+    get-childitem -path "./test" -recurse -exclude "foundText.txt"
+    | select-string -allmatches "$target_string" > ./test/foundText.txt
+}
+
 function main() {
 
     foreach ($directory in $args)
@@ -62,6 +67,8 @@ function main() {
     }
 
     write-lister_script;
+
+    find-text_in_test_dir;
 }
 
 main $MAGENTA_DIR $CYAN_DIR;
