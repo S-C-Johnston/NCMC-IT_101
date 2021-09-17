@@ -42,13 +42,12 @@ function remove-test_subdirs(){
 
 function main() {
 
-    foreach ($directory in $args)
-    {
+    foreach ($directory in $args){
         Write-Output "Debug main, directory is: $directory"
         mkdir $directory -ea 0
     }
 
-    foreach ($directory in $(Get-ChildItem -directory -recurse)) {
+    foreach ($directory in $(Get-ChildItem -directory -recurse)){
         if ($directory.name -eq 'test') {
             continue
         }
