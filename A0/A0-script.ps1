@@ -12,8 +12,8 @@ function new-color_bat_file($target_file){
     Write-Output "Debug new-color_bat_file, target_file is: $target_file";
     write-output '@echo off;
     for %%I in ("%~dp0.") do for %%J in ("%%~dpI.") do set ParentFolderName=%%~nxJ;
-    echo This file is in folder: %ParentFolderName%'
-    | out-file -encoding ascii -filepath "$target_file" -ea 0;
+    echo This file is in folder: %ParentFolderName%' |
+    out-file -encoding ascii -filepath "$target_file" -ea 0;
 
     #main function text from https://stackoverflow.com/a/60046276;
 };
@@ -22,8 +22,8 @@ function update-color_bat_file($target_file){
     Write-Output "Debug update-color_bat_file, target_file is: $target_file";
     $scripts_file = "$SCRIPT_ROOT\test\scripts";
     write-output "@echo on;
-    dir /s /b *.bat >> ""${scripts_file}"""
-    | out-file -Append -Encoding ascii -FilePath "$target_file" -ea 0;
+    dir /s /b *.bat >> ""${scripts_file}""" |
+    out-file -Append -Encoding ascii -FilePath "$target_file" -ea 0;
 };
 
 function write-lister_script(){
@@ -31,8 +31,8 @@ function write-lister_script(){
 };
 
 function find-text_in_test_dir($target_string){
-    get-childitem -path "./test" -recurse -exclude "foundText.txt"
-    | select-string -allmatches "$target_string" > ./test/foundText.txt;
+    get-childitem -path "./test" -recurse -exclude "foundText.txt" |
+    select-string -allmatches "$target_string" > ./test/foundText.txt;
 };
 
 function remove-test_subdirs(){
