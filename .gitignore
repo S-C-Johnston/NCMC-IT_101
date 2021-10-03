@@ -2,3 +2,7 @@
 A0/test/*
 A0/Out-File
 
+*~
+*.swp
+*.pdf
+*.jpg
