@@ -2,3 +2,5 @@
 * text=auto
 assignment_01.dxf filter=lfs diff=lfs merge=lfs -text
 upscaled-4x_elementaryschool.png filter=lfs diff=lfs merge=lfs -text
+.png filter=lfs diff=lfs merge=lfs -text
+*.png filter=lfs diff=lfs merge=lfs -text
