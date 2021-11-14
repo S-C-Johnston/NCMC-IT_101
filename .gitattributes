@@ -4,3 +4,8 @@ assignment_01.dxf filter=lfs diff=lfs merge=lfs -text
 upscaled-4x_elementaryschool.png filter=lfs diff=lfs merge=lfs -text
 .png filter=lfs diff=lfs merge=lfs -text
 *.png filter=lfs diff=lfs merge=lfs -text
+<<<<<<< HEAD
+=======
+Cabling_The_Complete_Guide_to_Network_Wiring.pdf filter=lfs diff=lfs merge=lfs -text
+anixter-standard-reference-guide-en.pdf filter=lfs diff=lfs merge=lfs -text
+>>>>>>> 959e8e544ec6eeafe166f546ac13ec5194a7a5be
