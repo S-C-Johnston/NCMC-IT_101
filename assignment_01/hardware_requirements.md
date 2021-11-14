@@ -2,14 +2,13 @@
 
 Erring on the side of more than I need rather than less, I'm going with a 48
 port current-gen Cisco switch which supplies PoE to all ports. It draws up to
-1kW and supplies up to 30W to each client device.
-
-[project_switch]: (https://www.insight.com/en_US/shop/product/C9200-48P-A/CISCO%20SYSTEMS/C9200-48P-A/Cisco-Catalyst-9200--Network-Advantage--switch--48-ports--smart--rackmountable/)
+1kW and supplies up to 30W to each client device:
+[project_switch]: https://www.insight.com/en_US/shop/product/C9200-48P-A/CISCO%20SYSTEMS/C9200-48P-A/Cisco-Catalyst-9200--Network-Advantage--switch--48-ports--smart--rackmountable/
 
 It is probable that each distribution frame will require multiple kW-UPSs. To
 which end, as a basic choice across all frames, pending additional details,
-I've selected this UPS.
-[IDF-A_UPS]: (https://www.insight.com/en_US/shop/product/9PX5K/EATON/9PX5K/Eaton-9PX-9PX5K--UPS--45-kW--5000-VA/)
+I've selected this UPS:
+[IDF-A_UPS]: https://www.insight.com/en_US/shop/product/9PX5K/EATON/9PX5K/Eaton-9PX-9PX5K--UPS--45-kW--5000-VA/
 
 ## MDF
 6 drops each standard room: 4x PoE wall jack, PoE WAP, and PoE clock
