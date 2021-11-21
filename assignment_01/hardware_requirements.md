@@ -80,3 +80,17 @@ power consumption of 4.5kW outputs approximately 15354 BTU/hr. Two 1.5 ton AC
 units would adequately cover the requirements for cooling in this IDF.
 
 ## IDF-B
+6 drops each standard room: 4x wall jack, WAP, and clock
+9 standard rooms: 54 horizontal runs
+
+Accounting for an assumption that a small switch may need to be placed in any
+of the electrical or mechanical rooms to accommodate unforeseen IoT devices,
+the main runs to the IDF should be covered adequately with more than 50%
+expansion overhead with 2 count of:
+
+[Cisco switch][project_switch]
+
+and for only two drawing down power at 1 kW each for a total of 2, power is
+more than adequately supplied by 1 count of:
+
+[Eaton UPS][IDF-A_UPS]
