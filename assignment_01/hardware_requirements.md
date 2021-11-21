@@ -94,3 +94,9 @@ and for only two drawing down power at 1 kW each for a total of 2, power is
 more than adequately supplied by 1 count of:
 
 [Eaton UPS][IDF-A_UPS]
+
+With a maximum power throughput of 4.5 kW from the UPS, this outputes
+approximately 15354 BTU/hr. Two 1.5 ton AC units would more than adequately
+cover the cooling needs in this IDF. Because of the small amount of hardware
+by comparison with power capacity, it's possible that overall building HVAC
+may cover this sufficiently.
