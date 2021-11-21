@@ -9,6 +9,13 @@ https://www.insight.com/en_US/shop/product/C9200-48P-A/CISCO%20SYSTEMS/C9200-48P
 
 [project_switch]: https://www.insight.com/en_US/shop/product/C9200-48P-A/CISCO%20SYSTEMS/C9200-48P-A/Cisco-Catalyst-9200--Network-Advantage--switch--48-ports--smart--rackmountable/
 
+There is a need for an edge router in this consideration. As a quick and dirty
+approximation of what's appropriate, a Cisco integrated router model 4321
+should be sufficient:
+https://www.insight.com/en_US/shop/product/ISR4321-V%2FK9/CISCO%20SYSTEMS/ISR4321-V%2FK9/Cisco-Integrated-Services-Router-4321--Unified-Communications-Bundle--router--rackmountable/
+
+[project_router]: https://www.insight.com/en_US/shop/product/ISR4321-V%2FK9/CISCO%20SYSTEMS/ISR4321-V%2FK9/Cisco-Integrated-Services-Router-4321--Unified-Communications-Bundle--router--rackmountable/
+
 It is probable that each distribution frame will require multiple kW-UPSs. To
 which end, as a basic choice across all frames, pending additional details,
 I've selected this UPS:
@@ -39,9 +46,14 @@ overhead of 8 count of:
 
 [Cisco switch][project_switch]
 
+A router is necessary, and it by definition should life in the MDF. It would
+consume some 120 Watts
+
+[Cisco router][project_router]
+
 Which should draw approximately 8 kW of power between them. The networking
 equipment only -not accounting for servers, SANs, etc- is adequately
-covered by 2 count of:
+covered by 2 count of this UPS, which has capacity for 4.5 kW:
 
 [Eaton UPS][IDF-A_UPS]
 
