@@ -25,3 +25,11 @@ name, IP, Model, MAC, uptime, admin status, operational status, PoE status,
 speed for each interface, clients, port (?), AP mode, certificate type, OEAP
 (?), primary software version and backup software version, AP sub mode (?),
 download status, upgrade role, mDNS status, Universal AP, and hyperlocation
+
+## Part 2
+
+### Step 3
+
+Information about the WLAN available on the WLAN overview screen includes its
+internal ID, the SSID, the profile name, its admin status, and the security
+policy.
