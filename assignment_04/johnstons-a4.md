@@ -123,4 +123,71 @@ administrator or DHCP server provides all details.)
 
  1. Which class of IP address would 197.22.103.221 belong: **Class C**
 
- 2. 
+ 2. Which of the following dotted notations cannot represent an IP address:
+	**301.188.12.77**
+
+    (301 is outside the range an octet can express, the maximum being 255)
+
+ 3. In a class A network, the first 16 bits are used for the network part, and
+	the last two octets are reserved for the host part: **False**
+
+    (A class A network uses 8 bits for the network and 24 bits for the hosts)
+
+ 4. To what class of network would the ip address 144.26.108.15 belong:
+	**Class B**
+
+ 5. To what class of network would the ip address 18.12.254.10 belong:
+    **Class A**
+
+ 6. In the IP 190.233.21.12, how many octets have been assigned by the NIC:
+	**Two octets**
+
+    (A class B address, which uses 16 bits for network and 16 bits for hosts)
+
+ 7. In the IP 88.224.73.201, how many octest could be assigned locally by the
+	network administrator: Three
+
+    (Class A, 8 bit network 24 bit hosts)
+
+ 8. Select the IP address which would belong to the largest network:
+	**69.22.214.158**
+
+ 9. Which of the folllowing best describes a class B network:
+	**net.net.host.host**
+
+ 10. There are three classes of commercial networks: **True**
+
+	(There are 5 classes, but class D and E reserved for special operations
+and are not for commercial networks)
+
+ 11. Ip address with numbers 224-255 [in the first octet] are reserved for
+	 multicast and experimental purposes: **True**
+
+ 12. A class C network address would have all 0s in the final octet: **True**
+
+ 13. In a class B network address the final two octets would have all 0s:
+	 **True**
+
+ 14. Which of the following is an example of a class C network:
+	 **196.25.10.0**
+
+ 15. which of the following best describes a class C network:
+	 **net.net.net.host**
+
+ 16. Which of the folowing best describes a class A network:
+	 **net.host.host.host**
+
+ 17. Which of the following is a class C IP address: **220.15.64.126**
+
+ 18. Select the IP address for the smallest network: **220.15.64.126**
+
+     (242.etc.etc.etc is in class E, which is not a commercial network block)
+
+ 19. How many octets have been assigned by InterNIC in a class C network:
+	 **Three**
+
+     (InterNIC being the historical predecessor to ICANN)
+
+ 20. In a class A IP address, how many bits have been assigned for the hosts:
+	 **Three**
+
