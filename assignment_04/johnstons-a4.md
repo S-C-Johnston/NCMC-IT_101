@@ -1,6 +1,6 @@
 ## Subnetting
 
-### T/F MAC/IP
+### T/F MAC and network devices
 
  1. Switches make low-level comparisons: **True**
 
@@ -30,7 +30,7 @@ handles which segment the packet goes to.
 	A layer-1 switch only makes a decision of which interface to use based on
 MAC, not on IP.
 
-### Multiple choice
+### Multiple choice MAC and network devices
 
  6. Which of the following best describes a frame:
 
@@ -105,4 +105,4 @@ block, in which case the network portion is assigned by the ISP and the local
 address is assigned by the administrator. In a private network, the
 administrator or DHCP server provides all details.)
 
-### Multiple-choice IP address
+### Multiple-choice IP addresses
