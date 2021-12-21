@@ -399,4 +399,34 @@ last addresses would be network ID and broadcast, respectively.)
 	 host field number be for the decimal host number expressed as .49:
      **xx11 0001**
 
+### Subnet masking
+
+ 1. How would the subnet mask 255.255.255.0 be represented in dotted binary:
+	**1111 1111.1111 1111.1111 1111.0000 0000**
+
+ 2. If only seven bits are borrowed in a class B network, what would the
+	subnet mask be in dotted decimal: **255.255.254.0**
+
+ 3. What would the subnet mask be in dotted decimal if only five bits were
+	borrowed from the third octet in a class B address (no ip-subnet zero):
+    **255.255.248.0**
+
+ 4. What would the subnet mask be in dotted decimal notation if only one bit
+	were borroed from the third octet in a class A address (no ip-subnet
+    zero): **255.255.128.0**
+
+ 5. Subnet masks tell devices which part of an address is the network number
+	including the subnet and which part is the host: **True**
+
+ 6. Subnet masks are 16 bits long adn are divided into two octets: **False**
+
+ 7. Subnet masks have all 0's in the network and subnetwork portion of their
+	addresses: **False**
+
+ 8. Binary bits in the subnet mask are used to represent which of the
+	following: **both b (subnet bits) and c (network bits)**
+
+ 9. What will the use of subnets do regarding the amount of broadcast traffic:
+	**decrease, because broadcasts are not forwarded outside [the subnet]**
+
 
