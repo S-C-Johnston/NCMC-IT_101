@@ -9,25 +9,25 @@ gateway's MAC address so the gateway can handle it by IP.
 
  2. A switch doesn't forward if MAC is in same network segment: **True**
 
-	A layer-1 switch just forwards packets by MAC, sending it down whichever
+	A layer-2 switch just forwards packets by MAC, sending it down whichever
 port it knows the MAC address is located in.
 
  3. Switches solve the problem of too much traffic on a network by dividing
 	the network: **False**
 
-    Layer-1 switches don't define subnets and are dumb to them, just pushing
+    Layer-2 switches don't define subnets and are dumb to them, just pushing
 	frames and packets based on MAC.
 
  4. When a switch forwards, it determins the precise segment: **False**
 
-	Layer-1 switches do not know what subnet or segment a frame or packet will
+	Layer-2 switches do not know what subnet or segment a frame or packet will
 arrive to, just the MAC address of the gateway stamped on the packet, and
 sends it that direction. If the MAC address belongs to a router, the router
 handles which segment the packet goes to.
 
  5. When a switch decides to forward, it uses only the IP address: **False**
 
-	A layer-1 switch only makes a decision of which interface to use based on
+	A layer-2 switch only makes a decision of which interface to use based on
 MAC, not on IP.
 
 ### Multiple choice MAC and network devices
@@ -225,4 +225,9 @@ and are not for commercial networks)
 
  15. 191 => **1011 1111**
 
+### Broacast and subnet addresses
 
+ 1. Best defines a broadcast:
+ **Data packet sent to all nodes on a network segment**
+
+ 2. 
