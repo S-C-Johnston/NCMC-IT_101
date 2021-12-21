@@ -442,4 +442,34 @@ last addresses would be network ID and broadcast, respectively.)
 
  4. How many ports does the router in the graphic have: **4 ports**
 
+### Whole enchilada problems
+
+ 1. Which of the following is the dotted decimal notation value of the host
+	portion of a Class A IP address 38.0.53.28 with a subnet mask of
+255.255.252.0: **1.228**
+
+ 2. Which of the following subnet masks will not be applicable to a class C IP
+	address but can be used with a class B IP address: **255.2555.0 [sic]**
+
+    (multiple choice, I assume this is a typo for 255.255.0.0, since it's the
+only subnet mask in the list which can't be used for a class C IP)
+
+ 3. Which of the following is a valid address for a class A IP address with
+	subnet mask of 255.255.240.0: **38.255.240.2 and 38.255.240.255**
+
+	(subnet blocks of 16 addresses in 3rd octet, both 192 and 240 divide
+evenly, so 0 would be the network address for 38.0.192.0, but with /20
+38.0.255.255 would be the broadcast address for the network to which
+38.0.240.255 belongs)
+
+ 4. Which of the following is a valid class B IP address with a subnet mask of
+	255.255.255.224: **130.0.0.1 and 147.255.0.48**
+
+	( /27 gives 32 address blocks in the 4th octet, class B is
+128.0.0.0-191.255.255.255. Any address ending with a multiple of 32 or
+one-short of a multiple, such as 31 is the a reserved address for the network
+address or the broadcast address, respectively)
+
+ 5. Which of the following is the first available address for a class A IP
+	address of 2.x.x.x with a subnet mask of 255.255.255.128: **2.0.0.1**
 
