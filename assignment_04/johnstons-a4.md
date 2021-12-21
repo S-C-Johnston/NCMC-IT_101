@@ -82,3 +82,27 @@ IP header as part of that packet is encapsulated in a frame. The frame header
 contains MAC addresses, not the IP header.)
 
 ### T/F IP addresses
+
+ 1. If a device on network A is moved to network B, its IP address will
+	change: **True**
+
+ 2. IP addresses are used to identify a machine on a network and the network
+	to which it is attached: **True**
+
+ 3. Each network connected to the internet has a unique network number:
+	**True**
+
+	(Assuming that a "network connected to the internet" consists of a public
+facing network block, which can be as small as 1 IP. A private network behind
+a router is by definition not unique, but is also not directly connected, it's
+connected by a router.)
+
+ 4. The network portion of every IP address is assigned by the local network
+	administrator: **False**
+
+    (Insofar as the "network portion" corresponds to a public IP network
+block, in which case the network portion is assigned by the ISP and the local
+address is assigned by the administrator. In a private network, the
+administrator or DHCP server provides all details.)
+
+### Multiple-choice IP address
