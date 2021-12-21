@@ -473,3 +473,103 @@ address or the broadcast address, respectively)
  5. Which of the following is the first available address for a class A IP
 	address of 2.x.x.x with a subnet mask of 255.255.255.128: **2.0.0.1**
 
+### Network Design with Subnets
+
+#### Real Estate Office
+
+16 agents, 1 receptionist, 1 owner: 18 humans
+
+3 printers, 1 file server: 4 independent machines
+
+A 24 port switch would cover all machines, add a router and a DSL modem with
+subscription for one public address. If all machines must be connected to the
+internet, the minimum IP addresses required from an ISP included a class C
+block with a subnet borrowing 3 bits (/27), for a total of some 30 host addresses in
+the network. Not factoring in equipment or DSL cost, installation expense
+would probably run in the territory of 2-3 billable hours.
+
+#### Veterinarian's Office
+
+cousin, recptionist, office manager: 3 humans location A
+
+Database server, 1 computer, dot-matrix and laser-jet printer: 4 machines
+at location A
+
+1 computer at home
+
+cousin, receptionist, doctor: 3 humans location B
+
+2 computers, laser-jet printer: 3 machines at location B
+
+I'm unclear on the process of billing out DSL, but this would require at least
+three DSL modems. The one at home could reasonably plug directly into the
+modem IIRC. The ones at either location would require a modem and a router
+behind it, with a LAN switch each. Neither location exceeds 4 machines which
+could possibly require LAN access, so a pair of 4-port switches would do fine.
+Probably 8-port switches would be wiser, however, to account for mild expansion
+overhead.
+
+One class C block with 5 subnet bits (/29) at each location would cover all
+devices adequately.
+
+#### ABC Packaging Company
+
+5 departments:
+ - Administration
+   + 14 people
+   + 5 printers
+ - Engineering
+   + 22 people
+   + 5 printers
+   + 1 file server
+ - Production
+   + 5 people
+ - Accounting
+   + 11 people
+   + 4 printers
+   + 1 datase and file server
+ - Sales
+   + 11 people
+   + 4 printers
+   + 1 file server
+
+Each dept requires a separate subnet: round up from 5 to 8 subnets given by a
+/27, which would give 32 addresses each, which is sufficient to cover the
+largest department. Engineering has 27 machines between the people and the
+printers, minus the server.
+
+The servers equire a separate subnet: covered fine by overhead from existing
+/27 subnet. The machines in the subnet would require only 4 addresses at most,
+assuming there's a miscommunication and Accountings' database and file servers
+are separate boxes.
+
+Managed switches capable of VLAN tagging would be sufficient to handle the
+subnetting while getting maximum density out of each. That would enable vlan
+encapsulation with subinterfaces on the router, which would simplifiy
+management considerably. Assuming I can't take the easy way out, each machine
+could be configured manually with addresses for the networks
+192.168.1.{0,32,64,96,128,160,etc} with subnet mask 255.255.255.224. The
+router would only need one connection, but a sufficiently annoying routing
+table, to the internal LANs. A local infrastructure (domain, DHCP, DNS, etc)
+server would go a long way to simplify things, and ACLs are much easier to
+manage with a domain server rather than on a router, but it isn't strictly
+necessary for a sufficiently small *static* network.
+
+Assuming these departments are segmented off physically, the logical topology
+might look like:
+
+- ISP demarc connected to the router
+- router in MDF
+  + at most 4 servers in MDF, connected to the breakout switch
+  + 12 port breakout switch at MDF
+    * 24 port switch in IDF for Administration
+    * 32 port switch in IDF for Engineering
+    * 8 port switch in IDF for Production
+    * 16 port switch in IDF for Accounting
+    * 16 port switch IDF for Sales
+
+This doesn't leave any overhead for fault or expansion, really, so I'd advice
+the next size up for each.
+
+I can't reasonably estimate the billable hours, but with equipment in hand, I
+bet I'd get this done within a work-week.
