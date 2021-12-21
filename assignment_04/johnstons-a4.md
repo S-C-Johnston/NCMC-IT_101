@@ -269,4 +269,134 @@ to a block)
 
  9. Which best describes the address 147.30.74.1: **Class B host address**
 
+### Subnetting possible vs useable
+
+ 1. Subnet addresses are assigned locally: **True**
+
+ 2. Subnet addresses include only a network number and a host number:
+	**False**
+
+    (Subnet addresses include a network number, a subnet number, and a host
+number. 192.168.1.128/25 would define a network 192.168.1 and a subnet number of
+128, leaving 7 bits for a host number)
+
+ 3. Each time the number of bits borrowed from an 8 bit octet decreases, the
+	decimal value representing the octet in the subnet mask increases by a
+power of two: **False**
+
+    (The decimal number representing the octet in the subnet mask _decreases_,
+and not really by a power of two. The difference will be a power of two, such
+as 8, 16, 32, but the number itself is not a clean power of two, being
+composed of the sums of several powers of two. 32 -> 16 is a decrease by a
+power of two, 224 -> 192 is a decrease of 64 which is a power of two, but
+neither 224 nor 192 is a power of two in the first place.)
+
+ 4. How many subnets can be created with 4 borrowed bits: **16 subnets**
+
+ 5. How many subnets can be created with 5 borrowed bits: **32 subnets**
+
+ 6. How many subnets can be created with 6 borrowed bits: **64 subnets**
+
+ 7. How many actual subnets can be created with 4 borrowed bits, excluding
+	ip-subnet zero: **14 subnets**
+
+ 8. How many actual subnets can be created with 5 borrowed bits, excluding
+	ip-subnet zero: **30 subnets**
+
+ 9. How many possible subnets with 6 borrowed bits [excluding ip-subnet zero]:
+	**62 subnets**
+
+	(Assuming the bracketed text was elided as a typo, otherwise that's a
+duplicate question and inconsistent with the last two questions, in which case
+the answer is 64 subnets)
+
+ 10. In class C network with 3 borrowed bits for subnets, to which subnet would
+	 host range 0110 0001 belong, excluding ip-subnet zero: **third subnet**
+
+ 11. How would the subnet 0110 0001 field for a class C IP address with 6
+	 useable subnets be expressed in binary: **011**
+
+     (While the subnet mask would borrow 5 bits for a /29 subnet mask, the
+subnet field in the given octet would only be 0110 0xxx. The other options
+presented added trailing ones, which affects the subnet number.)
+
+ 12. How would the third useable range of Class C IP address with eight
+	 possible addresses be expressed in decimal, no ip-subnet zero: **64**
+
+	 (No ip-subnet zero makes the 0th and the last subnet ID unavailable. 3
+bits would normally suffice to describe 8 subnets, but the next size up would
+be 4 bits describing 16 subnets, -2 for 14. That gives 14 'no ip-zubnet zero'
+blocks, size of 16 addresses, and the third subnet address, disallowing zero,
+would start at 0011 xxxx => 48, and the top end of that range would be the
+64th class C address. All other numbers are out of bounds for the 3rd subnet.)
+
+ 13. How would 220 be expressed as a binary number in an octet: **1101 1100**
+
+ 14. Sixth possible subnetwork field of Class C IP address in binary: **101**
+
+     (indexing from 000, which is the 1st _possible_ subnet)
+
+ 15. To what subnetwork on a class C network with three bits for a subnet
+	 would a fourth octet expressed as 1010 1101 belong (no ip-subnet zero):
+**fifth**
+
+	 (Indexing from 001, the 1st subnet in such a case, the subnet 101 is just
+its decimal value, the 5th subnet)
+
+ 16. How would the host field be expressed in binary of a class C IP address
+	 which has 6 usable subnets for host number 13 (no ip-subnet zero):
+     **0 1101**
+
+ 17. Which of the following describes the maximum number of bits that can be
+	 borrowed in a class C network (no ip-subnet zero): **6 bits**
+
+     (RFC 3021 introduced borrowing 7 bits, but this is multiple choice and
+dealing with Classful networks.)
+
+ 18. Which of the following best describes the maximum number of bits that can
+	 be borrowed in a class B network (no ip-subnet zero): **14 bits**
+
+     (8 bits from the 3rd octet plus 6 bits from the fourth)
+
+ 19. If two bits are borrowed from the host field of a class C network, how
+	 many possible subnetworks can be created: **4 subnets**
+
+ 20. If four bits are borrowed from the host field of a class B network, how
+	 many subnets can be created (no ip-subnet zero): **16 subnets**
+
+	 (multiple choice, but with no ip-subnet zero, only 14 subnets are
+useable)
+
+ 21. If four bits are borrowed from the host field of a class B network, how
+	 many possible hosts per subnetwork can be created: **4096 hosts**
+
+     (multiple choice, but only 4094 would be useable because the 0th and the
+last addresses would be network ID and broadcast, respectively.)
+
+ 22. If two bits are borrowed from the host field of a class B network, how
+	 many possible hosts per subnetwork: **64 hosts**
+
+     (multiple choice, only 62 would be useable as previously mentioned)
+
+ 23. If we have 4 possible subnets in our nework then how many bits have been
+	 borrowed from the host field: **2 bits**
+
+ 24. If we have 4 possible subnets in our network, then what will the range of
+	 binary host field numbers be for the first network:
+     **xx00 0000-xx11 1111**
+
+ 25. If we have 4 possible subnets in our network then what decimal value
+	 would be assigned to an octet expressed as 0101 1011: **.91**
+
+ 26. If we have 2 possible subnets in our network what would the binary
+	 subnetwork field number be for the decimal host number expressed as .196:
+     **10**
+
+     (Subnetwork field for 2 possible subnets would amount to 0xxx xxxx and
+1xxx xxxx)
+
+ 27. In a network with two bits borrowed for subnets, what would the binary
+	 host field number be for the decimal host number expressed as .49:
+     **xx11 0001**
+
 
