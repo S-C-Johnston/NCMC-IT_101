@@ -106,3 +106,21 @@ address is assigned by the administrator. In a private network, the
 administrator or DHCP server provides all details.)
 
 ### Multiple-choice IP addresses
+
+ 5. How many bits in an IP address: **32 bits**
+
+ 6. How many bytes in an IP address: **4 bytes**
+
+ 7. What is the minimum decimal value of an octet: **0**
+
+ 8. What is the maximum decimal value in a byte: **255**
+
+ 9. how many bits in a byte: **8**
+
+ 10. how many bytes are in a MAC address: **6**
+
+### Classes of IP addresses
+
+ 1. Which class of IP address would 197.22.103.221 belong: **Class C**
+
+ 2. 
