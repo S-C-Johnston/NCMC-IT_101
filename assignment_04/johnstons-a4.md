@@ -429,4 +429,17 @@ last addresses would be network ID and broadcast, respectively.)
  9. What will the use of subnets do regarding the amount of broadcast traffic:
 	**decrease, because broadcasts are not forwarded outside [the subnet]**
 
+### Router Functions
+
+ 1. In the graphic, if device A3 is sending data to device C3, out of which
+	port will the router send the data: **port C1**
+
+ 2. In the graphic, how many IP addresses does the router have:
+    **4 IP addresses**
+
+ 3. In the graphic, if device A2 wants to send data to device A4, will the
+	router forward the data to network B: **No**
+
+ 4. How many ports does the router in the graphic have: **4 ports**
+
 
