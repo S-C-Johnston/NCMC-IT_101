@@ -32,12 +32,53 @@ MAC, not on IP.
 
 ### Multiple choice
 
- 6. Logical grouping of information
- 7. Network layer
- 8. Data link layer
- 9. Data link layer
- 10. MAC address and IP address will stay the same
+ 6. Which of the following best describes a frame:
+
+    Logical grouping of information
+
+ 7. At which OSI layer does routing occur:
+
+    Network layer
+
+ 8. At which OSI layer does switching occur:
+
+    Data link layer
+
+ 9. At which OSI layer is MAC address located:
+
+    Data link layer
+
+ 10. If a workstation is moved within a network, what happens to MAC and IP:
+
+     MAC address and IP address will stay the same
+
      (within network, assuming static IP and no DHCP goofiness)
- 11. IP address will change, MAC address will stay the same
- 12. hosts on the different networks
- 13. network address?
+
+ 11. If a workstation is moved to another network, what happens to MAC and IP:
+
+     IP address will change, MAC address will stay the same
+
+ 12. Routers pass packets between:
+
+     hosts on the different networks
+
+ 13. Which part of IP address does a router ignore during determination:
+
+     Source address
+
+     (Destination address is obviously required, host address is effectively
+equivalent, and routing tables often rely on network addresses)
+
+ 14. MAC addresses use a ??? scheme while IP addresses use a ??? scheme
+
+     Flat, hierarchical
+
+ 15. What type of address is included in an IP header:
+
+     source and destination IP and MAC addresses
+
+     (most correct option, but an IP header is specific to a packet, and the
+IP header as part of that packet is encapsulated in a frame. The frame header
+contains MAC addresses, not the IP header.)
+
+### T/F IP addresses
