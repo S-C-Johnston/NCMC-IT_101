@@ -157,7 +157,7 @@ administrator or DHCP server provides all details.)
 
  10. There are three classes of commercial networks: **True**
 
-	(There are 5 classes, but class D and E reserved for special operations
+    (There are 5 classes, but class D and E reserved for special operations
 and are not for commercial networks)
 
  11. Ip address with numbers 224-255 [in the first octet] are reserved for
@@ -230,4 +230,43 @@ and are not for commercial networks)
  1. Best defines a broadcast:
  **Data packet sent to all nodes on a network segment**
 
- 2. 
+ 2. Class C broadcast address: **221.218.253.255**
+
+ 3. In a class C subnet addresses up to six bits can be borrowed from the host
+	field: **True, but**
+
+    (In a Classful context, prior to CIDR which was introduced in 1993, the
+greatest number of bits legally borrowed from the host field was 6. Well after
+CIDR was introduced and Classful routing went the way of the Dodo, RFC 3021
+introduced point-to-point subnet mask /31, which enabled a small subnet
+between exactly two host addresses, since broadcasting isn't a real
+consideration when the only target of a broadcast would be the host you're
+trying to reach anyway. In a "Class C" network, the statement is true. In a
+modern CIDR network, it is false, because up to 7 bits can be borrowed,
+although the technical goofiness has weird implications for borrowing 8 bits.)
+
+ 4. Valid class B IP broadcast address with no subnets: **129.37.255.255**
+
+ 5. Which of the following is reserved for broadcast in 198.64.74.x/27:
+	**.127**
+
+    (Highest address in the 3rd block of 32 addresses, which is the number of
+address in 2^5 bits)
+
+ 6. Valid class C IP subnet number /27: **.128**
+
+    (Beginning of 4th block of 32 addresses)
+
+ 7. Valid class B IP subnet broadcast address:
+    **1011 0110.0101 1101.0000 0000.0111 1111**
+
+	(Class B, network mask 255.255, subnet mask 255.128 for 255.255.255.128,
+CIDR /25, highest address fills the remaining bits, 32-25=7, 2^7=128 addresses
+to a block)
+
+ 8. Which type of IP address can borrow 1 bit from the last octet to create
+	subnets: **Class A, B and C can borrow 1 bit from the last octet**
+
+ 9. Which best describes the address 147.30.74.1: **Class B host address**
+
+
