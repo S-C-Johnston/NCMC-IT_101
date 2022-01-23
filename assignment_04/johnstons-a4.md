@@ -560,8 +560,8 @@ might look like:
 
 - ISP demarc connected to the router
 - router in MDF
-  + at most 4 servers in MDF, connected to the breakout switch
-  + 12 port breakout switch at MDF
+  + at most 4 servers in MDF, connected to the backbone switch
+  + 12 port backbone switch at MDF
     * 24 port switch in IDF for Administration
     * 32 port switch in IDF for Engineering
     * 8 port switch in IDF for Production
@@ -573,3 +573,53 @@ the next size up for each.
 
 I can't reasonably estimate the billable hours, but with equipment in hand, I
 bet I'd get this done within a work-week.
+
+#### Website Company
+
+- FDDI: Fiber Distributed Data Interface with its own protocol, late 80s/early
+  90s fiber standard carrying 100 Mb/s. Superceded by ethernet which is
+independent of protocol, carried by fiber or fastethernet copper. Indicates
+essay scenario is relying on older technology.
+- West: Floors 3, 4, 5
+  + IDFs each floor
+	* 20 nodes/hosts each floor
+	* Cisco switches, 24 ports each
+  + Cisco Catalyst switch backbone
+- East: Floors 1..5
+  + Unclear nodes per floor, assume 20
+  + MDF with T1 capable router, ISP demarc and CSU/DSU, Cisco Catalyst
+    backbone switch connected to the backbone in the west building, and very
+certainly a beefy firewall given the the exposed IPs for so many hosts
+	* Realistically, in a modern network, the connection would be greater than
+	  a literal T1, either a business-class cable connection with associated
+cable modem, or a fiber connection, etc
+  + IDFs each floor
+	* Unstated, assuming 20 nodes each floor
+	* Cisco switches, 24 ports each
+- Subnetting: two blocks of 62 IPs, given the context safely assumed to be
+  Class C network blocks with two borroed bits, rather than CIDR, which would
+be noted as /26
+  + 198.74.56.{0..63,64..128}
+	* This is not sufficient to give every host an IP, assuming that there are
+	  160 hosts between the two buildings, 20 on each of the 8 floors which
+have hosts
+	* The problem of insufficient IPs is resolved in more modern networking
+	  with NAT, allowing a small number of public IPs to service arbitrarily
+many private IPs, which is generally more appropriate than using public IPs
+for such end-user devices
+  + Subnet mask compliant with the ISP provided IP blocks would be
+    255.255.255.192, which would match the provided blocks exactly, with
+network and broadcast addresses of 198.74.56.0 & 63, and 198.74.56.64 & 128
+respectively
+	* Since the provided IP blocks amount to one overarching block of
+	  contiguous addresses, all routed through one edge-router and then
+assigned to hosts all connected to one switched campus-area network, it
+wouldn't be completely insane to use a subnet mask of 255.255.255.128, it's
+just that nothing would be able to occupy the IP addresses ending in 0, 63,
+64, or 128.  That would make either building's LAN susceptible to broadcasts
+generated anywhere in the CAN, but it would reduce unnecessary router traffic.
+	* Pursuant to the notion of unnecessary router traffic, it would be fairly
+	  trivial to add an inter-LAN router whose purpose was to route between
+the two buildings, and as such the edge router would only be routing to
+exterior connections. Alternatively, multilayer or layer 3 switches would
+suffice for this variety of CAN
