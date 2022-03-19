@@ -684,7 +684,7 @@ suffice for this variety of CAN
   shown in the diagram, the Cisco 2501 and 2514, may support IPSec-based VPNs.
 
   It may be better from an engineering and security standpoint to use proper
-  routers anyway. Even better if doing so enables VPN intraneting.
+  routers anyway. Even better if doing so enables VPN intranetting.
 
 ##### Subnetting:
 
@@ -713,10 +713,10 @@ might be since they're served behind separate routers, then additionally:
 
 i.e:
 
-1. 192.168.1.0/26 (64 addresses)
-2. 192.168.1.{64,96,128,etc}/27 (32 addresses each)
-3. 192.168.2.128/28 (16 addresses)
-4. 192.168.2.144/30 (4 addresses)
+1. 172.16.1.0/26 (64 addresses)
+2. 172.16.1.{64,96,128,etc}/27 (32 addresses each)
+3. 172.16.2.128/28 (16 addresses)
+4. 172.16.2.144/30 (4 addresses)
 
 Addresses given assume that `ip subnet zero` is enabled.
 
@@ -724,9 +724,19 @@ However, that method leaves little understanding for the possibility of
 increasingly many chain locations. There does not, to me, seem to be a reason
 not to use a /24 scheme across the board and separate out the subnets in the
 3rd octet, numbering for each location or each purpose. RCS and HQ might share
-192.168.1.0, and each chain location might have 192.168.{1,2,3,4,etc}.0
+172.16.1.0, and each chain location might have 172.16.{1,2,3,4,etc}.0
 
 That's a lot of empty IPs, sure, but that doesn't really matter in the context
 of many separate locations each using IPs in a  *private* IP addressing
 scheme. Having the subnets somehow semantically reflect information about
-their location would be a net benefit, in my opinion.
+their location would be a net benefit, in my opinion. Further that end, I'm
+using 172.16.0.0 subnets because that implies something to humans about the
+context, each subnet being part of a larger valid network. The total number of
+devices in the foreseeable future would be unlikely to eclipse the address
+space of a 192.168.0.0 network, however. One could just as easily use any of
+the private address spaces. The 10.0.0.0 private space could load a lot of
+semantic value into the ip address, and be easier to memorize for technicians.
+One might use the 2nd octet for which state the location is in, since the
+franchise has locations in several states, and the 3rd for its function or
+fine-grained location. That is, however, literally just semantics at that
+point.
