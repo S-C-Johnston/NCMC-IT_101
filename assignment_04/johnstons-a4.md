@@ -599,7 +599,7 @@ cable modem, or a fiber connection, etc
 - Subnetting: two blocks of 62 IPs, given the context safely assumed to be
   Class C network blocks with two borroed bits, rather than CIDR, which would
 be noted as /26
-  + 198.74.56.{0..63,64..128}
+  + 198.74.56.{0..63,64..128}/26
 	* This is not sufficient to give every host an IP, assuming that there are
 	  160 hosts between the two buildings, 20 on each of the 8 floors which
 have hosts
@@ -623,3 +623,110 @@ generated anywhere in the CAN, but it would reduce unnecessary router traffic.
 the two buildings, and as such the edge router would only be routing to
 exterior connections. Alternatively, multilayer or layer 3 switches would
 suffice for this variety of CAN
+
+#### John's Brewhouse
+
+- Locations:
+  + 10 chain locations
+
+    PoS: 5, on-site servers: 2, switch: 1, exterior: 3
+
+	* CamSwitch MA
+	* Framingham MA
+	* Wayne PA
+	* Springfield PA
+	* Pittsburgh PA
+	* Manchester CT
+	* Wilmington DE
+	* Providence RI
+	* Lake Grove NY
+	* Washington DC
+  + HQ Boston MA
+    Servers: 3, switch: 1, PC: 1, exterior: 2
+  + RCS Danvers MA
+    Routers: 3, switches: 2, servers 3, PCs: 25, exterior: 2
+    
+- smallest number of IPs in one physical location: 7
+  + (Assuming that the exterior gateways and switches also need IPs and that
+    those are part of the same private network)
+  + Although in each chain it looks like the PoS only interact internally with
+	the servers, and do not cross the gateway boundary for anything
+    themselves.
+
+- total IPs for any chain location: 11
+
+- largest number of IPs in one physical location: 35
+  + (Same assumptions)
+  + RCS, however, has a weird segment where 27 hosts are behind a switch
+    attached separately to a router, which would be their default gateway.
+
+- In the event of a modern layout, where each chain location's internal
+  network were attached to an overall intranet using VPNs, and IPs were served
+  by DHCP instead of static configuration, subnetting would be a non-issue,
+  just a measure against broadcast storms over external lines. Valuable enough
+  to still do it, but less important for IP management and allocation.
+  + In the existing context, without adding extra equipment or servers, it is
+	simplest to subnet so that each location has guaranteed internally-valid
+    IPs. Static configuration, then, would only step on one location's own
+    toes, rather than mangling the configuration elsewhere in the intranet.
+
+- The web article at networkcomputing, which I retrieved in an
+  [archive.org capture](https://web.archive.org/web/20121018010920/networkcomputing.com/1005/1005centerfoldtext.html)
+  suggests that the dialup method over the publicly switched network would be
+  replaced with internet connections, in which case they would implement
+  firewalls and encryption. My opinion is that firewalling and encrypting data
+  are always good ideas, but the article having been written in 1999, that
+  functionality may not have been as baked in as it is now. I would add even
+  basic firewalling at each exterior connection, which could be as simple as
+  hosting it on the servers.
+
+- Further the idea of an intranet, it looks as though the model of routers
+  shown in the diagram, the Cisco 2501 and 2514, may support IPSec-based VPNs.
+
+  It may be better from an engineering and security standpoint to use proper
+  routers anyway. Even better if doing so enables VPN intraneting.
+
+##### Subnetting:
+
+My prediliction, in the event of designing with some clearance in mind, is to
+use subnets at least large enough to handle an additional 50% of the currently
+used IP space, gracefully. Subnetting operating on powers of 2 means that some
+excessively large blocks will be allocated.
+
+Since the blocks need to line up with appropriate edges to not conflict,
+assigning blocks so that many small blocks in aggregate line up with a larger
+block would be ideal. The best way to do this is to think about it the other
+direction around, IME: assign the largest blocks first, to the low end of the
+IP range, and then assign the smaller blocks in the remaining space.
+
+
+If the assumptions above are correct, that the network equipment also need IPs
+in their respective subnets, the cleanest subnets, providing some expansion
+overhead: 
+- /26 for all of RCS' location (64 addresses)
+- /27 for each of the ten chain locations (32 addresses)
+- /28 for the HQ and its servers (16 addresses)
+
+If the RCS PC network is a separate subnet from the proxy server, which it
+might be since they're served behind separate routers, then additionally:
+- /30 for the proxy server, allowing for expansion (4 addresses)
+
+i.e:
+
+1. 192.168.1.0/26 (64 addresses)
+2. 192.168.1.{64,96,128,etc}/27 (32 addresses each)
+3. 192.168.2.128/28 (16 addresses)
+4. 192.168.2.144/30 (4 addresses)
+
+Addresses given assume that `ip subnet zero` is enabled.
+
+However, that method leaves little understanding for the possibility of
+increasingly many chain locations. There does not, to me, seem to be a reason
+not to use a /24 scheme across the board and separate out the subnets in the
+3rd octet, numbering for each location or each purpose. RCS and HQ might share
+192.168.1.0, and each chain location might have 192.168.{1,2,3,4,etc}.0
+
+That's a lot of empty IPs, sure, but that doesn't really matter in the context
+of many separate locations each using IPs in a  *private* IP addressing
+scheme. Having the subnets somehow semantically reflect information about
+their location would be a net benefit, in my opinion.
