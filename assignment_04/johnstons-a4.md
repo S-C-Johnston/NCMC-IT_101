@@ -740,3 +740,116 @@ One might use the 2nd octet for which state the location is in, since the
 franchise has locations in several states, and the 3rd for its function or
 fine-grained location. That is, however, literally just semantics at that
 point.
+
+### Lab: Variable Length Subnet Masking (VLSM)
+
+Note: link to VSLM table given in labwork broken, but a "magic table" of the
+same kind can be found on cisco's learningnetwork site.
+
+- IT HQ, router A
+  + 2 IPs (servers)
+  + Router B: 2 B-A
+    * 57 IPs
+    * 24 IPs
+    * 6 IPs
+  + Router C: 2 C-A
+    * 28 IPs
+    * 12 IPs
+  + Router D: 2 D-A
+    * 39 IPs
+    * 14 IPs
+
+- 57
+- 39
+- 28
+- 24
+- 14
+- 12
+- 06
+- 02 * 4
+
+Given the VLSM table the way it is explained in the lab and in the cisco
+learning page, the IP subnets would be:
+- 57 -> 192.168.70.64/26
+- 39 -> 192.168.70.128/26
+- 28 -> 192.168.70.32/27
+- 24 -> 192.168.70.192/27
+- 14 -> 192.168.70.16/28
+- 12 -> 192.168.70.224/28
+- 06 -> 192.168.70.8/29
+- 02 -> 192.168.70.4/30
+- 02 -> 192.168.70.240/30
+- 02 -> 192.168.70.244/30
+- 02 -> 192.168.70.248/30
+
+I think this is dumb. It's chaotic, squeezing blocks in wherever they can be
+squeezed. It feels like it is intentionally missing the point, and it doesn't
+do space packing effectively. Granted, this lab seems to assume that ip 0
+is not usable, so it goes out of its way to avoid assigning it. IP 0 has been
+a default setting for several years now.
+
+Assuming these blocks will never grow, and that IP 0 is in place, I would
+subnet this way:
+
+- 57 -> 192.168.70.0/26
+- 39 -> 192.168.70.64/26
+- 28 -> 192.168.70.128/27
+- 24 -> 192.168.70.160/27
+- 14 -> 192.168.70.192/28
+- 12 -> 192.168.70.208/28
+- 06 -> 192.168.70.224/29
+- 02 -> 192.168.70.232/30
+- 02 -> 192.168.70.236/30
+- 02 -> 192.168.70.240/30
+- 02 -> 192.168.70.244/30
+
+which leaves a spare /29 left over. Although, if you wanted that /29 block to
+be more contiguous with the rest, rather than sandwhiching network equipment
+IPs between it and the others, the last blocks of 2 (4) ips each could easily
+be assigned from the top down: x.252/30, x.248/40, x.244/30, x.240/30. My
+method is operating on principles of packing and space-management, whereby the
+largest requirements are met first. I can stick a /30 subnet almost literally
+anywhere in that space, since its boundaries align on so many edges; I can
+only put a /26 block in four places, so it has stricter alignment and needs to
+be be accounted for first.
+
+The way that RFC 1219 suggests, also written in the era where subnet 0 was
+verboten, this could potentially be built up with growth bits in similar
+fashion, which would look like a weird binary partitioning. Here compared with
+the layout given by the lab. It, likewise, assigns the largest blocks first in
+contiguous alignments, so the allocations "grow" from the middle, 128, out...
+kindof... toward the edges. This only works because the subnets are sorted by
+size.
+
+- 57 -> 192.168.70.64/26  -> 10xx xxhh -> .128
+- 39 -> 192.168.70.128/26 -> 01xx xxhh -> .64
+- 28 -> 192.168.70.32/27  -> 110x xxhh -> .192
+- 24 -> 192.168.70.192/27 -> 001x xxhh -> .32
+- 14 -> 192.168.70.16/28  -> 1110 xxhh -> .224
+- 12 -> 192.168.70.224/28 -> 0001 xxhh -> .16
+- 06 -> 192.168.70.8/29   -> 0000 1xhh -> .8
+- 02 -> 192.168.70.4/30   -> 0001 10hh -> .24
+- 02 -> 192.168.70.240/30 -> 0001 01hh -> .20
+- 02 -> 192.168.70.244/30 -> 0001 11hh -> .28
+- 02 -> 192.168.70.248/30 -> 0000 01hh -> .4
+
+If one instead assumes that the 0th IP is usable, one gets an almost equally
+weird result. It's binary space partitioning, again, but bottom up... kindof
+instead of middle-out. This is not nearly as clean
+
+- 57 -> 192.168.70.64/26  -> 00xx xxhh -> .0
+- 39 -> 192.168.70.128/26 -> 10xx xxhh -> .128
+- 28 -> 192.168.70.32/27  -> 010x xxhh -> .64
+- 24 -> 192.168.70.192/27 -> 110x xxhh -> .192
+- 14 -> 192.168.70.16/28  -> 0110 xxhh -> .96
+- 12 -> 192.168.70.224/28 -> 1110 xxhh -> .224
+- 06 -> 192.168.70.8/29   -> 0111 0xhh -> .112
+- 02 -> 192.168.70.4/30   -> 1110 10hh -> .240
+- 02 -> 192.168.70.240/30 -> 1111 10hh -> .248
+- 02 -> 192.168.70.244/30 -> 1111 01hh -> .244
+- 02 -> 192.168.70.248/30 -> 1111 11hh -> .252
+
+In any case, rfc 1219 invokes a lot of fiddle-farting around. In the context
+of uniformly sized subnets which need some room to grow, and are likely
+overprovisioned to start, that's fine. In the context of known-size subnets
+which are as closely provisioned as they can be, it's a lot of overhead.
